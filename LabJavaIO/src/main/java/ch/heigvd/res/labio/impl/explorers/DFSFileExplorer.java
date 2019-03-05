@@ -24,7 +24,7 @@ public class DFSFileExplorer implements IFileExplorer {
         if (listOfFiles[i].isFile()) {
           try {
             vistor.visit(rootDirectory);
-          } catch (IOException e) {
+          }catch(IOException e){
             e.printStackTrace();
           }
         } else if (listOfFiles[i].isDirectory()) {
@@ -34,7 +34,7 @@ public class DFSFileExplorer implements IFileExplorer {
     }else{
       try {
         vistor.visit(rootDirectory);
-      } catch (IOException e) {
+      }catch(IOException e){
         e.printStackTrace();
       }
     }

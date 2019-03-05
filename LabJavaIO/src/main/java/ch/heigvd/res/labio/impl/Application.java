@@ -121,6 +121,7 @@ public class Application implements IApplication {
     for(String s : quote.getTags()){
       chemin += "/" + s;
     }
+    System.out.println(chemin);
     new File(chemin).mkdirs();
     chemin += "/" + filename;
     new File(chemin).createNewFile();
