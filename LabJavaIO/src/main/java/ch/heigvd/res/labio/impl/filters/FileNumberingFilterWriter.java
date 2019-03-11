@@ -20,7 +20,8 @@ import java.util.logging.Logger;
 public class FileNumberingFilterWriter extends FilterWriter {
 
   private static final Logger LOG = Logger.getLogger(FileNumberingFilterWriter.class.getName());
-  private int line = 1; //Rajouté ici pour garder la ligne courante.
+  private int line = 0; //Rajouté ici pour garder la ligne courante.
+  private char lastChar;
 
   public FileNumberingFilterWriter(Writer out) {
     super(out);
@@ -30,8 +31,8 @@ public class FileNumberingFilterWriter extends FilterWriter {
   public void write(String str, int off, int len) throws IOException {
     try {
       String s = "";
-      if(out.toString().equals("")){
-        s = line + "\t";
+      if(line == 0){
+        s = ++line + "\t";
       }
       str = str.substring(off);
       for(int i = 0; i < len;){
@@ -76,15 +77,16 @@ public class FileNumberingFilterWriter extends FilterWriter {
 
   @Override
   public void write(int c) throws IOException {
-    if(out.toString().equals("") || (out.toString().endsWith("\r") && c != '\n')){
-      out.write(line++ + "\t");
+    if(line == 0 || lastChar == '\r' && (char)c != '\n'){
+      out.write(++line + "\t");
     }
     try {
       out.write(c);
-      if(c == '\n'){
-        out.write(line++ + "\t");
+      if(c == '\n' ){
+        out.write(++line + "\t");
+      }else{
       }
-
+      lastChar = (char)c;
     } catch (Exception e) {
       e.printStackTrace();
       throw new IOException("An error occur in FileNumberingFilterWriter.");
