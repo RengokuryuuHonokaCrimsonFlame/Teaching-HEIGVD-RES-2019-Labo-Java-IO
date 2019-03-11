@@ -16,26 +16,41 @@ public class UpperCaseFilterWriter extends FilterWriter {
 
   @Override
   public void write(String str, int off, int len) throws IOException {
-    String s = "";
-    for(int i = 0; i < len; ++i) {
-      char c =  Character.toUpperCase(str.charAt(off + i));
-      s += c;
+    try{
+      String s = "";
+      for(int i = 0; i < len; ++i) {
+        char c =  Character.toUpperCase(str.charAt(off + i));
+        s += c;
+      }
+      out.append(s);
+    }catch(Exception e){
+      e.printStackTrace();
+      throw new IOException("An error occur in UpperCaseFilterWriter.");
     }
-    out.append(s);
   }
 
   @Override
   public void write(char[] cbuf, int off, int len) throws IOException {
-    String s = "";
-    for(int i = 0; i < len; ++i){
-      s += Character.toUpperCase(cbuf[off + i]);
+    try{
+      String s = "";
+      for(int i = 0; i < len; ++i){
+        s += Character.toUpperCase(cbuf[off + i]);
+      }
+      out.append(s);
+    }catch(Exception e){
+      e.printStackTrace();
+      throw new IOException("An error occur in UpperCaseFilterWriter.");
     }
-    out.append(s);
   }
 
   @Override
   public void write(int c) throws IOException {
-    out.append((char)Character.toUpperCase(c));
+    try {
+      out.append((char) Character.toUpperCase(c));
+    }catch(Exception e){
+      e.printStackTrace();
+      throw new IOException("An error occur in UpperCaseFilterWriter.");
+    }
   }
 
 }
