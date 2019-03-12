@@ -117,15 +117,15 @@ public class Application implements IApplication {
    * @throws IOException 
    */
   void storeQuote(Quote quote, String filename) throws IOException {
-    String chemin = "workspace/quotes";
-    for(String s : quote.getTags()){
+    String chemin = "workspace/quotes"; //Début du chemin
+    for(String s : quote.getTags()){ //Suite du chemin
       chemin += "/" + s;
     }
-    new File(chemin).mkdirs();
+    new File(chemin).mkdirs(); //Crée les dossiers (si ne sont pas déjà existant)
     chemin += "/" + filename;
-    new File(chemin).createNewFile();
+    new File(chemin).createNewFile(); //Crée le fichier
     try (BufferedWriter bw = new BufferedWriter(new FileWriter(chemin))) {
-      bw.write(quote.getQuote());
+      bw.write(quote.getQuote()); //Ecrit le fichier
     } catch (IOException e) {
       e.printStackTrace();
       throw e;
@@ -148,7 +148,7 @@ public class Application implements IApplication {
          */
         String s = file.toString() + "\n";
         try {
-          writer.write(s);
+          writer.write(s); //Ecrit le nom du fichier (avec le chemin)
         } catch (IOException e) {
           e.printStackTrace();
           throw e;

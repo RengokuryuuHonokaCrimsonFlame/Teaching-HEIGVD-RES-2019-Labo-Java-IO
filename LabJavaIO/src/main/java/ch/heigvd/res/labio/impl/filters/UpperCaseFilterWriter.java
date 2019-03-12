@@ -18,10 +18,12 @@ public class UpperCaseFilterWriter extends FilterWriter {
   public void write(String str, int off, int len) throws IOException {
     try{
       String s = "";
+      //Met tous les charactères en majuscule
       for(int i = 0; i < len; ++i) {
         char c =  Character.toUpperCase(str.charAt(off + i));
         s += c;
       }
+      //Met le résultat dans l'output
       out.append(s);
     }catch(Exception e){
       e.printStackTrace();
@@ -33,9 +35,11 @@ public class UpperCaseFilterWriter extends FilterWriter {
   public void write(char[] cbuf, int off, int len) throws IOException {
     try{
       String s = "";
+      //Met tous les charactères en majuscule
       for(int i = 0; i < len; ++i){
         s += Character.toUpperCase(cbuf[off + i]);
       }
+      //Met le résultat dans l'output
       out.append(s);
     }catch(Exception e){
       e.printStackTrace();
@@ -46,6 +50,7 @@ public class UpperCaseFilterWriter extends FilterWriter {
   @Override
   public void write(int c) throws IOException {
     try {
+      //Met le charactère en majuscule dans l'output
       out.append((char) Character.toUpperCase(c));
     }catch(Exception e){
       e.printStackTrace();

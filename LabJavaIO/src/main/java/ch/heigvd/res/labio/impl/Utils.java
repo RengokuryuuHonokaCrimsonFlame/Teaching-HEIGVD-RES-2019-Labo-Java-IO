@@ -20,26 +20,26 @@ public class Utils {
    * contain any line separator, then the first element is an empty string.
    */
   public static String[] getNextLine(String lines) {
-    String[] tableau = {"",""};
+    String[] tableau = {"",""}; //Crée le tableau
     if (lines.length() > 0) {
       int i = 0;
       for (char c : lines.toCharArray()) {
-        tableau[0] += c;
+        tableau[0] += c; //On remplit le tableau en première position lettre par lettre
         i++;
-        if (c == '\n' || c == '\r') {
+        if (c == '\n' || c == '\r') { //Si on rencontre une fin de ligne
           if(c == '\r' && i < lines.length() && lines.substring(i, i + 1).equals("\n")){
             tableau[0] += lines.substring(i, i + 1);
             i++;
           }
-          break;
+          break; //On sort de la boucle
         }
       }
       String fin = tableau[0].substring(tableau[0].length() - 1);
-      if(!fin.equals("\n") && !fin.equals("\r")) {
-        tableau[1] = lines;
+      if(!fin.equals("\n") && !fin.equals("\r")) { //Si ne contient pas de fin de ligne
+        tableau[1] = lines; //On inverse les deux tableaux
         tableau[0] = "";
       }else{
-        tableau[1] = lines.substring(i, lines.length());
+        tableau[1] = lines.substring(i, lines.length()); //Sinon on met le reste du texte dans la deuxième position du tableau
       }
     }
     return tableau;
